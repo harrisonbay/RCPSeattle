@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html xml:lang="en" lang="en">
+
+<head>
+  <title>CSE442 | Final Project</title>
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="./src/stylesheets/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- D3 -->
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://unpkg.com/topojson@3"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
+  <script src="https://unpkg.com/enter-view"></script>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <section class="title">
+    <div id="container">
+      <div class="top left">
+        <img class="actualImage" src="assets/img/edited2.png" alt="" />
+      </div>
+      <div class="bottom left">
+        <h2><a href="https://cse442-20f.github.io/FP-CrimeEducationAndPoverty/">
+            Race, Class, and Policing in Seattle
+          </a></h2>
+      </div>
+      <div class="bottom2 left">
+        <h3>
+          Akif Ahmed &nbsp; Harrison Bay &nbsp; Hang Do &nbsp; Joseph Schmidt &nbsp; Anita Silva</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro" id="intro">
+    <h1 style="margin-bottom: 70px;"><i>[View this article in fullscreen mode!]</i></h1>
+    <div class="prose">
+      <p><span style="font-size:135%;"><b>Crime:</b></span> a symptom of societal sickness. Crime rates are a heavily
+        politicized statistic that illustrate a problem with a specific community, often shaped to fit a particular
+        agenda. In the United States in particular, crime rates are historically (and presently) used to criminalize by
+        race or class. For example, a popular statistic touted by the intellectually dishonest is that of the roughly 10 million crimes
+        reported in the United States in 2019, the perpetrator was white or Hispanic about 69.5% of the time or black
+        about 26.4% of the time, but only 13.4% of the general U.S. population is black.<sup><a href="#references">[1]</a></sup> </p>
+
+      <p>A little bit of critical thinking makes it pretty easy to dismiss whatever dishonest conclusion was insinuated—after all, crime and its various motivations are incredibly complex, heavy topics—but perhaps the
+        most
+        critical aspect of these statistics to consider is the methodology by which the data were gathered. In
+        particular,
+        is policing and law enforcement presence uniform across all demographics? How about geographically and across
+        different neighborhoods?</p>
+
+      <p>The answer to this question should be a resounding no. One study that analyzed census tracts of 19 different
+        cities found that <b>an increase of 1 standard deviation in overall inequality increased the aggravated assault
+          rate by 7.3%, the robbery rate by 9.3%, the murder rate by 10.3%, and the burglary rate by 5.1%.</b><sup><a
+            href="#references">[2]</a></sup> Additionally, looking at information from the U.S. Census Bureau on median
+        household incomes, we see that in 2017, the median household income of black families was 59% of the median
+        household income of white families and 49% of the median household income of Asian families, those quantities
+        being $40,258, $68,145, and $81,331 respectively. </p>
+
+      <p>But these numbers are admittedly quite opaque—"overall inequality" in particular is a very vague term—and a skeptic may reasonably be unconvinced. We also
+        don't have answers to the more geographical questions: where are policing efforts concentrated/where are crimes
+        usually concentrated? To explore answers to these questions, we visualized crime</b><sup><a href="#references">[3]</a></sup> and
+        demographic statistics</b><sup><a href="#references">[4]</a></sup> close to home in Seattle.</p>
+    </div>
+  </section>
+
+  <section id="scrolly-overlay">
+
+    <div class="scrolly" id="viz">
+      <!-- sticky graphic -->
+      <figure class="sticky">
+        <div id="dashboard">
+          <div class="tooltip hidden" id="plotTooltip">
+            <p><b id="TractNumber">Important Label Heading</b></p>
+            <p><span id="value">100</span></p>
+          </div>
+
+          <div class="tooltip hidden" id="stackedBarTooltip">
+            <p><span id="value">100</span></p>
+          </div>
+        </div>
+      </figure>
+
+      <!-- step text / article -->
+      <article>
+        <div class='step' data-index='0' style="margin-bottom:-10rem;">
+          <p>First, let's look at Seattle as a whole. In the 2013-2018, nearly 400,000 individual criminal entries are
+            in our dataset, with over 75% of them being property-related incidents. As expected, areas near downtown
+            Seattle have the most recorded criminal activity. We also see some pertinent racial
+            demographics for Seattle—the city is roughly 70% white and 30% non-white (try hovering over different parts of the visualization!).</p>
+        </div>
+        <div class='step' data-index='0' style="margin-bottom:5rem;">
+          <p>Now, click on "Median Income" in the upper left. It is immediately clear that the median income choropleth looks like the inverse of the crime choropleth, suggesting an inverse correlation, and more well-off households tend to move towards the coasts.
+            Following a similar story akin to the national demographics, white and Asian households have the highest
+            median household incomes at $94,910 and $77,487 annually while black households are the lowest at $38,366,
+            or just <i>40.4%</i> that of whites. Median income overall in Seattle is $85,562.</p>
+        </div>
+        <div class='step' data-index='1' style="margin-bottom:-10rem;">
+          <p>Let's start taking a closer look at individual areas of Seattle; we'll check out downtown first.
+          For obvious reasons, this tract has far and away the highest number of recorded crimes. </p>
+        </div>
+        <div class='step' data-index='2' style="margin-bottom:-25rem;">
+          <p>Next, let's take a look at the Montlake area. This tract has the highest overall median income at nearly $180,000 and a low number of recorded crimes. Demographically, it is overwhelmingly white at nearly 90%. This sort of neighborhood is not the exception, but the <i>norm</i>.</p>
+        </div>
+        <div class='step' data-index='3' style="margin-bottom:-25rem;">
+          <p>We see the same story across Seattle, from Briarcliff and Discovery Park...</p>
+        </div>
+        <div class='step' data-index='4' style="margin-bottom:-25rem;">
+          <p> to Laurelhurst...</p>
+        </div>
+        <div class='step' data-index='5' style="margin-bottom:-10rem;">
+          <p>to Broadview.</p>
+        </div>
+        <div class='step' data-index='6' style="margin-bottom:-18rem;">
+          <p>Conversely, let's take a look at Northgate and the surrounding areas. Overall median income is substantially lower at around $45,000, $65,000, and $70,000 for tracts 12, 6, and 13, respectively. Crime is in the top 20%, and it is less white with percentages at around 65-70%. Similar demographics can also be seen around downtown (Belltown).</p>
+        </div>
+        <div class='step' data-index='7' style="margin-bottom:-18rem;">
+          <p>An interesting exception to this is the commercial area in Ballard. Racial demographics look very similar to those of aforementioned wealthy neighborhoods. Income demographics and crime rate, however, do not. It is clear that as one's intuition might suggest, commercial areas are either more policed or have higher crime rates.</p>
+        </div>
+        <div class='step' data-index='8' style="margin-bottom:-25rem;">
+          <p>Another interesting case is Columbia City. Median income is actually a bit above average, yet there is still a high number of recorded crimes. But looking at the demographics, we see that this neighborhood has a substantial ethnic population, particularly black.</p>
+        </div>
+        <div class='step' data-index='9' style="margin-bottom:-10rem;">
+          <p>Looking at North Beacon Hill yields a similar observation, though the median income is quite a bit less. This reaffirms the idea that black and minority neighborhoods may be overpoliced. </p>
+        </div>
+        <div class='step' data-index='10' style="margin-bottom:-25rem;">
+          <p>A closing observation is that majority ethnic neighborhoods tend to be substantially poorer. The International District is one of the poorest areas in Seattle, with overall median income around $35,000 and $45,000 in tracts 91 and 90, respectively and is roughly 30-40% white. </p>
+        </div>
+        <div class='step' data-index='11' style="margin-bottom:-10rem;">
+          <p>The same is true for the Rainier Beach area, with overall median income about $60,000; it is about a third white. Recall that there is a strong inverse correlation between median income of a neighborhood and the recorded amount of crime.</p>
+        </div>
+        <div class='step' data-index='0'>
+          <p>Feel free to play around with the visualization and explore more. You can select your own tracts by clicking on the map.</p>
+        </div>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- Conclusion -->
+  <section id="outro" class="outro">
+    <div class="prose" style="column-count:2; column-gap:100px; margin: 0 auto;">
+      <p><b style="font-size: 24px;">In conclusion, we see that in Seattle:</b>
+        <ul style="font-size: 18px;">
+          <li>Median household income and number of crimes recorded are strongly inversely correlated.</li>
+          <br>
+          <li>Commercial areas tend to have more recorded crime/are more heavily policed.</li>
+          <br>
+          <li>Ethnic neighborhoods tend to have more recorded crime/are more heavily policed.</li>
+          <br>
+          <li>Ethnic neighborhoods tend to have substantially less wealth.</li>
+        </ul>
+      </p>
+      <br>
+      <div style="font-size:18px;">One final note: take a look at the redlining map on the right. It is immediately evident that historical redlining efforts affect present-day recorded crimes, income, and demographics: can you recognize Montlake, Laurelhurst, and Briarcliff? If you are interested in learning more about government-sponsored redlining by the now-defunct Home Owner's Loan Corporation (HOLC), check out Richard Rothstein's <a href="https://www.goodreads.com/book/show/32191706-the-color-of-law"><i>The Color of Law</i></a>.</div>
+      <figure>
+        <img src="assets/img/redlining.jpg_large" style="height:600px">
+        <figcaption style="font-size:12px; font-family:TiemposText-Regular; text-align:center;">The locations of the green areas looks pretty familiar, don't they?<sup><a href="#references">[5]</a></sup></figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+
+  <!-- References -->
+  <section id="references" class="references" style="font-size: 18px;">
+    <hr>
+    <ul class="references-list">
+      <li class="references-entry">[1] The Office of Juvenile Justice and Delinquency Prevention's <a href="https://www.ojjdp.gov/ojstatbb/crime/ucr.asp?table_in=2">Statistical Briefing Book</a>.</li>
+      
+      <li class="references-entry">[2] John R. Hipp, 2007. <a href="https://escholarship.org/uc/item/7kw8p7hw"><i>Income
+            Inequality, Race, and Place: Does the Distribution of Race and Class Within Neighborhoods Affect Crime
+            Rates</i></a>.</li>
+      <li class="references-entry">[3] The Seattle Government's public release of <a href="https://data.seattle.gov/Public-Safety/SPD-Crime-Data-2008-Present/tazs-3rd5">SPD Crime Data</a>.</li>
+      <li class="references-entry">[4] The U.S. Census Bureau's <a
+          href="https://www.census.gov/programs-surveys/acs">American Community Survey</a>. Demographic statistics are
+        taken from the ACS' 2018 5-year averages.</li>
+      <li class="references-entry">[5] Kate Macfarlane's <a href="https://twitter.com/_katemacfarlane/status/1279615581000396801">Redlining Map</a>.</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer id="about">
+    <div class="about-container">
+      <div class="about-text">
+        <p>This article was created as the Final Project for <a
+            href="https://courses.cs.washington.edu/courses/cse442/20au/">CSE442, AU20</a> at the University of Washington.</p>
+      </div>
+      <div class="about-links">
+        <a href="https://github.com/cse442-20f/FP-CrimeEducationAndPoverty">Source Code</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS Scripts for the visualizations -->
+  <script src="./src/js/app.min.js"></script>
+</body>
+
+</html>
